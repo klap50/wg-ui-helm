@@ -1,0 +1,35 @@
+# Número de réplicas
+replicaCount: 1
+
+# Configuración de la imagen
+image:
+  repository: ngoduykhanh/wireguard-ui
+  tag: latest
+  pullPolicy: IfNotPresent
+
+# Configuración de los puertos (si es necesario)
+service:
+  type: ClusterIP
+  port: 80
+
+# Configuraciones de volumen
+persistence:
+  enabled: true
+  storageClass: longhorn
+  size: 1Gi
+  accessMode: ReadWriteOnce
+
+# Configuraciones de recursos para el contenedor
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+# Variables de entorno (recomendado usar Kubernetes Secrets para valores sensibles)
+env:
+  WGUI_USERNAME: admin
+  WGUI_PASSWORD: admin
+  # otros valores no sensibles pueden ir aquí

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wireguard-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wireguard-ui
+  template:
+    metadata:
+      labels:
+        app: wireguard-ui
+    spec:
+      containers:
+      - name: wireguard-ui
+        image: ngoduykhanh/wireguard-ui:latest
+        env:
+          - name: SESSION_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: wireguard-ui-secrets
+                key: session-secret
+          - name: SENDGRID_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: wireguard-ui-secrets
+                key: sendgrid-api-key
+          # Añade otras variables de entorno aquí
+          - name: WGUI_USERNAME
+            value: "admin"
+          - name: WGUI_PASSWORD
+            value: "admin"
+        volumeMounts:
+          - mountPath: "/app/db"
+            name: db
+      volumes:
+        - name: db
+          persistentVolumeClaim:
+            claimName: wireguard-ui-db

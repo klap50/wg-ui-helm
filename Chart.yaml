@@ -1,0 +1,19 @@
+apiVersion: v2
+name: wireguard-ui
+description: Un chart de Helm para desplegar WireGuard-UI en Kubernetes
+# Versión del chart de Helm
+version: 0.1.0
+# Versión de la aplicación
+appVersion: "1.0"
+# Información adicional
+keywords:
+  - wireguard
+  - vpn
+  - ui
+home: https://github.com/tu-repositorio/wireguard-ui
+sources:
+  - https://github.com/tu-repositorio/wireguard-ui
+maintainers:
+  - name: TuNombre
+    email: tu-email@example.com
+    url: https://tu-sitio-web.com
